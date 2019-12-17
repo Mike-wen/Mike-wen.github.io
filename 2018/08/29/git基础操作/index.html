@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="git基础操作"><meta name="keywords" content=""><meta name="author" content="Mike-wen"><meta name="copyright" content="Mike-wen"><title>git基础操作 | SYLZW daily</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#git出现原因"><span class="toc-number">2.</span> <span class="toc-text">git出现原因</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#现存的版本控制系统"><span class="toc-number">3.</span> <span class="toc-text">现存的版本控制系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#集中式版本控制系统：（CVS、SVN、ClearCase、VSS）"><span class="toc-number">3.1.</span> <span class="toc-text">集中式版本控制系统：（CVS、SVN、ClearCase、VSS）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分布式版本控制系统：-git"><span class="toc-number">3.2.</span> <span class="toc-text">分布式版本控制系统：(git)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#git安装"><span class="toc-number">4.</span> <span class="toc-text">git安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#git自报家门"><span class="toc-number">5.</span> <span class="toc-text">git自报家门</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#初始化使用GIT库"><span class="toc-number">6.</span> <span class="toc-text">初始化使用GIT库#</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化GIT库"><span class="toc-number">6.1.</span> <span class="toc-text">初始化GIT库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用GIT库"><span class="toc-number">6.2.</span> <span class="toc-text">使用GIT库</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#版本控制"><span class="toc-number">7.</span> <span class="toc-text">版本控制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考链接"><span class="toc-number">8.</span> <span class="toc-text">参考链接</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Mike-wen</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">14</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">15</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">5</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">SYLZW daily</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span></div><div id="post-info"><div id="post-title">git基础操作</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-08-29</time></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul>
+<li>设想这样一种情况，如果小A写了一篇文章，并在过程中为了保险<code>保存了大量相似的文章</code>，用来备用，以防后悔拿来用，很麻烦。</li>
+<li>有一天小A想让小B帮忙协作写文章，一天后，小B完成了改动，小A也完成了自己的改动，小A希望自己能将小A和小B的<code>协作合并</code>，需要找出不同，很困难。</li>
+<li>git是一款版本控制软件，可以用来帮忙解决文档的<code>历史回档</code>问题<code>共同协作</code>的合并问题。<br><img src="history.png" alt=""><a id="more"></a>
+</li>
+</ul>
+<hr>
+<h1 id="git出现原因"><a href="#git出现原因" class="headerlink" title="git出现原因"></a>git出现原因</h1><blockquote>
+<ul>
+<li>2002年以前，世界各地的志愿者把源代码通过这个diff发给linus,<a href="https://baike.baidu.com/item/%E6%9E%97%E7%BA%B3%E6%96%AF%C2%B7%E6%89%98%E7%93%A6%E5%85%B9/2122821?fr=aladdin&fromid=400810&fromtitle=linus(linus)" target="_blank" rel="noopener">linus</a>本人通过手工方式合并代码。linus反对使用集中式版本控制系统，集中式版本控制系统速度慢而且是付费的，与linux的开源精神不符。</li>
+<li>linux就这样手工方式合并了十年，linus很难继续通过手工方式合并，社区的兄弟们表达了强烈的不满，linus选择了一个商业的版本控制系统bitkeeper，后来有位linux社区的兄弟视图破解bitkeeper,于是惹怒了开发公司bitmover,收回了linux社区的免费使用权。</li>
+<li>linus花了两周时间用C写了一个分布式版本控制系统，这就是GIT！git很快就成为了最流行的分布式版本控制系统。</li>
+</ul>
+</blockquote>
+<hr>
+<h1 id="现存的版本控制系统"><a href="#现存的版本控制系统" class="headerlink" title="现存的版本控制系统"></a>现存的版本控制系统</h1><h2 id="集中式版本控制系统：（CVS、SVN、ClearCase、VSS）"><a href="#集中式版本控制系统：（CVS、SVN、ClearCase、VSS）" class="headerlink" title="集中式版本控制系统：（CVS、SVN、ClearCase、VSS）"></a>集中式版本控制系统：（CVS、SVN、ClearCase、VSS）</h2><ul>
+<li>版本库是集中存放在中央服务器，干活的时候用的都是自己的电脑，所以先从中央服务器取得时候最信息的版本，干完活了，再把自己的活推送给中央服务器。一旦<code>中央服务器出现问题</code>，则所有人<code>不能工作</code>。</li>
+</ul>
+<h2 id="分布式版本控制系统：-git"><a href="#分布式版本控制系统：-git" class="headerlink" title="分布式版本控制系统：(git)"></a>分布式版本控制系统：(git)</h2><ul>
+<li>每个人的<code>本地电脑</code>都是一个完整的版本库，这样，你的工作不需要工作不需要联网，你自己电脑改了文件A，你的同事也在他的电脑上改了文件A。这时，你们俩之间只需要各自的修改推送给对方，就可以互相看到对方的修改。但很少存在两人之间的电脑上推送版本库的。分布式版本控制系统通常也有一台充当“<code>中央服务器端</code>”，服务器服务的作用仅仅是用来下那个<code>方便交换</code>。</li>
+</ul>
+<hr>
+<h1 id="git安装"><a href="#git安装" class="headerlink" title="git安装"></a>git安装</h1><p>linux: Debian或Ubuntu Linux</p>
+<blockquote>
+<p> sudo apt-get install git</p>
+</blockquote>
+<p>windows：</p>
+<blockquote>
+<p><a href="https://git-scm.com/downloads" target="_blank" rel="noopener">https://git-scm.com/downloads</a></p>
+</blockquote>
+<hr>
+<h1 id="git自报家门"><a href="#git自报家门" class="headerlink" title="git自报家门"></a>git自报家门</h1><ul>
+<li><p>每个机器都必须<code>自报家门</code>，你的名字和email地址.本地的所有git仓库都会使用这个配置，当然也可以对某个仓库制定不同的用户名和Email地址。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;Mike-wen&quot;</span><br><span class="line">git config --global user.email &quot;1781693821@qq.com&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可查看当前git仓库的配置情况。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list</span><br></pre></td></tr></table></figure>
+<p><img src="git_config.png" alt=""></p>
+</li>
+</ul>
+<hr>
+<h1 id="初始化使用GIT库"><a href="#初始化使用GIT库" class="headerlink" title="初始化使用GIT库#"></a>初始化使用GIT库#</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir test_repository </span><br><span class="line">git init	初始化一个版本的库</span><br><span class="line">git add readme.txt 告诉git将文件放到仓库</span><br><span class="line">git commit -m &quot;hello &quot;本次提交的说明&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="初始化GIT库"><a href="#初始化GIT库" class="headerlink" title="初始化GIT库"></a>初始化GIT库</h2><blockquote>
+<p><img src="git_init.png" alt=""></p>
+</blockquote>
+<h2 id="使用GIT库"><a href="#使用GIT库" class="headerlink" title="使用GIT库"></a>使用GIT库</h2><ul>
+<li>首先在test_repository新建名例为readme.txt文件<blockquote>
+<p><img src="git_add.png" alt=""></p>
+</blockquote>
+</li>
+<li><code>git add readme.txt</code>成功将readme.txt添加到缓存区</li>
+<li><code>git commit -m &#39;first write&#39;</code>,<code>-m</code>后面的文本是本次提交的说明<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 file changed:表示一个文件改动</span><br><span class="line">2 insertions:插入了两行内容</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><img src="git_add1.png" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h1 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h1><ul>
+<li><code>git log</code>查看最近到最远的提交日志<blockquote>
+<p><img src="git_log.png" alt=""></p>
+</blockquote>
+</li>
+<li><code>git log --pretty=oneline</code>查看简易的提交日志<blockquote>
+<p><img src="git_log_pretty.png" alt=""></p>
+</blockquote>
+</li>
+<li><code>git reset --hard HEAD^</code>(回退到上一个版本，HEAD^^前两个版本以此类推，也可以写成“HEAD~次数”)<blockquote>
+<p><img src="git_reset.png" alt=""></p>
+</blockquote>
+</li>
+<li><code>git log</code>后发现最新的版本号记录消失了，可以通过输入git reset –hard ID号回退到之前最新的版本号。<blockquote>
+<p><img src="git_log1.png" alt=""></p>
+</blockquote>
+</li>
+<li><code>git reflog</code>用来记录下每一次的版本的切换<blockquote>
+<p><img src="git_reflog.png" alt=""></p>
+</blockquote>
+</li>
+<li><code>git reset --hard 版本号</code>前四位便可以切换到指定版本<blockquote>
+<p><img src="git_hard.png" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<ul>
+<li>工作区和版本库(.git)、暂存区(stage)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add filename 将文件添加到stage(index)暂存区内</span><br><span class="line">git commit -m 将暂存区内的文件提交到版本库中</span><br><span class="line">git status查看当前版本较之前的改动</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><img src="git_repository.png" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<p>7.撤销修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- filename	丢弃工作区的修改</span><br></pre></td></tr></table></figure>
+<ol>
+<li>当暂存区没有内容时，执行该操作，会同步版本库中的内容    回到最近git commit</li>
+<li>当初暂存区有内容呀时，执行该操作，会同步暂存区内的内容 回到最近git add<br>场景1：当改乱了工作区的某个文件的内容，想直接丢弃工作区的内容<code>git checkout -- filename</code><blockquote>
+<p><img src="%E5%9C%BA%E6%99%AF1.png" alt=""><br>场景2：当改乱了工作区的内容，并添加到了占存区</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD filename</span><br><span class="line">git checkout -- filename</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><img src="%E5%9C%BA%E6%99%AF2.png" alt=""></p>
+</blockquote>
+</li>
+</ol>
+<p>场景3：已经提交了不适合的版本修改，回退版本<br><code>git reset --hard HEAD^</code></p>
+<blockquote>
+<p><img src="%E5%9C%BA%E6%99%AF3_1.png" alt=""><br><img src="%E5%9C%BA%E6%99%AF3_2.png" alt=""></p>
+</blockquote>
+<hr>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener" title="git">廖雪峰的GIT教程</a></p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Mike-wen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2018/08/29/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/">http://yoursite.com/2018/08/29/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2018/09/08/VisualCode%E6%90%AD%E5%BB%BAc%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/"><i class="fa fa-chevron-left">  </i><span>VisualCode搭建c/c++环境</span></a></div><div class="next-post pull-right"><a href="/2018/08/27/markdown%E8%AF%AD%E6%B3%95%E6%95%B4%E7%90%86/"><span>markdown语法整理</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2019 By Mike-wen</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script></body></html>

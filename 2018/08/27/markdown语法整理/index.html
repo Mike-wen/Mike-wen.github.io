@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="markdown语法整理"><meta name="keywords" content="markdown"><meta name="author" content="Mike-wen"><meta name="copyright" content="Mike-wen"><title>markdown语法整理 | SYLZW daily</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#标题"><span class="toc-number">2.</span> <span class="toc-text">标题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Setext-1"><span class="toc-number">2.1.</span> <span class="toc-text">[Setext][1]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#atx-2"><span class="toc-number">2.2.</span> <span class="toc-text">[atx][2]</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#块引用"><span class="toc-number">3.</span> <span class="toc-text">块引用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#列表"><span class="toc-number">4.</span> <span class="toc-text">列表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码块"><span class="toc-number">5.</span> <span class="toc-text">代码块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#水平线"><span class="toc-number">6.</span> <span class="toc-text">水平线</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#超链接"><span class="toc-number">7.</span> <span class="toc-text">超链接</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Mike-wen</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">14</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">15</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">5</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">SYLZW daily</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span></div><div id="post-info"><div id="post-title">markdown语法整理</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-08-27</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/markdown/">markdown</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>由于发表博文时，始终对markdown语法存在疑惑，因此对markdown语法进行整理，便于以后的文章书写。</p>
+<ol>
+<li>Markdown 的目标是易于阅读, 创作和编辑文章. HTML 是一种 发布  格式; Markdown是一种 创作 格式. </li>
+<li>对于 Markdown 中未包含的标签,直接使用标签就行了.<a id="more"></a>
+</li>
+</ol>
+<hr>
+<h1 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h1><p>Markdown支持两种形式的标题，[Setext][1]和[atx][2].</p>
+<h2 id="Setext-1"><a href="#Setext-1" class="headerlink" title="[Setext][1]"></a>[Setext][1]</h2><ul>
+<li>任意长度的 ‘=’ 和 ‘-’都是可以的。</li>
+<li>这里我思考了一个问题<br>qustion:如何区分分隔符和‘-’标题突出符的区别？<br>answer:测试之后发现只有在每段内容的最后才可以当分隔符使用。</li>
+</ul>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">This is on H1</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; </span><br></pre></td></tr></table></figure>
+</blockquote>
+<hr>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">This is on H2</span><br><span class="line">------------- </span><br></pre></td></tr></table></figure>
+</blockquote>
+<hr>
+<h2 id="atx-2"><a href="#atx-2" class="headerlink" title="[atx][2]"></a>[atx][2]</h2><ul>
+<li>atx样式的标题开头使用1-6个#号，对应1-6级标题</li>
+<li>可以有选择的关闭atx样式，这个纯粹是用来美化的 </li>
+<li>只有开始的‘#’号决定了标题的级别</li>
+</ul>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># This is on H1 </span><br></pre></td></tr></table></figure>
+</blockquote>
+<hr>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## This is on H2 </span><br></pre></td></tr></table></figure>
+</blockquote>
+<hr>
+<h1 id="块引用"><a href="#块引用" class="headerlink" title="块引用"></a>块引用</h1><ul>
+<li>Markdown 使用email样式的 ‘&gt;’ 字符来创建块应用</li>
+<li>块引用嵌套只需添加额外层级的 ‘&gt;’</li>
+<li>代码块需在内容前按下双TAB</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; This is the first level of quoting.&#x2F;&#x2F;普通块引用</span><br><span class="line">&gt;</span><br><span class="line">&gt; &gt; This is nested blockquote.       &#x2F;&#x2F;块引用嵌套</span><br><span class="line">&gt;                                    &#x2F;&#x2F;这里尝试了多层嵌套快引用 555555555555</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">&gt;     printf(&quot;hello, world!&quot;);       &#x2F;&#x2F;代码块</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>This is the first level of quoting.</p>
+<blockquote>
+<p>This is nested blockquote.</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>This is third level of quoting.</p>
+<blockquote>
+<p>This is fouth level of quoting.</p>
+<blockquote>
+<p>This is fifth level of quoting.</p>
+<blockquote>
+<p>This is sixth level of quoting.</p>
+<blockquote>
+<p>This is seventh level of quoting.</p>
+<blockquote>
+<p>This is eighth level of quoting.</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<pre><code>printf(&quot;hello, world!&quot;);</code></pre></blockquote>
+<hr>
+<h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><ul>
+<li>列表常用来将问题或解释分点讨论</li>
+<li>有两种列表：有序 和 无序</li>
+<li>无序列表可使用‘*’、‘+’、‘-’， 有序列表则使用数字加句号（英文状态下）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;无序列表</span><br><span class="line">* people</span><br><span class="line">* fish</span><br><span class="line">* bird</span><br><span class="line"></span><br><span class="line">+ people</span><br><span class="line">+ fish</span><br><span class="line">+ bird</span><br><span class="line"></span><br><span class="line">- people</span><br><span class="line">- fish</span><br><span class="line">- bird</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;有序列表</span><br><span class="line">1. people</span><br><span class="line">2. fish</span><br><span class="line">3. bird</span><br></pre></td></tr></table></figure>
+<blockquote>
+</blockquote>
+<ul>
+<li>people</li>
+<li>fish</li>
+<li>bird</li>
+</ul>
+<hr>
+<ol>
+<li>people</li>
+<li>fish</li>
+<li>bird</li>
+</ol>
+<h1 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h1><ul>
+<li>用于输出编程语言和标记语言，代码块中的内容会原样呈现</li>
+<li>只需要缩进4个空格和一个水平制表符便可以插入代码块</li>
+<li>使用 ```C  ``` 加入语言名后可以高光显示代码，支持多种语言</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"hello, world!"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="水平线"><a href="#水平线" class="headerlink" title="水平线"></a>水平线</h1><ul>
+<li>如果一行只有三个以上的连字符，星号，或者下划线会生成一条水平线</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">***</span><br><span class="line">___</span><br></pre></td></tr></table></figure>
+<blockquote>
+<hr>
+</blockquote>
+<hr>
+<hr>
+<h1 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h1><ul>
+<li>Markdown支持两种链接形式：内联和引用</li>
+<li>创建内联： <code>[链接文本](链接的位置)</code></li>
+<li>创建引用：<code>[链接文本][标签名]</code>，<br>然后再文章中的任意位置定义链接标签<code>[标签名]： http://XXXXX (标题)</code><br>最后的标题可以用单引号, 双引号, 或者圆括号包围.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;内联链接</span><br><span class="line">&gt; &gt; [BaiDu](http:&#x2F;&#x2F;www.baidu.com)</span><br><span class="line">&gt; &gt; [Google](http:&#x2F;&#x2F;www.google.com)</span><br><span class="line"></span><br><span class="line">&gt;引用链接</span><br><span class="line">&gt; &gt; [TaoBao][tb]</span><br><span class="line">[tb]:http:&#x2F;&#x2F;www.taobao.com (taobao)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>内联链接</p>
+<blockquote>
+<p><a href="http://www.baidu.com" target="_blank" rel="noopener" title="BaiDu">BaiDu</a><br><a href="http://www.google.com" target="_blank" rel="noopener" title="Google">Google</a></p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>引用链接</p>
+<blockquote>
+<p>[TaoBao][tb]<br>[tb]:<a href="http://www.taobao.com" target="_blank" rel="noopener">http://www.taobao.com</a> (TaoBao)</p>
+</blockquote>
+</blockquote>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Mike-wen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2018/08/27/markdown%E8%AF%AD%E6%B3%95%E6%95%B4%E7%90%86/">http://yoursite.com/2018/08/27/markdown%E8%AF%AD%E6%B3%95%E6%95%B4%E7%90%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/markdown/">markdown</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2018/08/29/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/"><i class="fa fa-chevron-left">  </i><span>git基础操作</span></a></div><div class="next-post pull-right"><a href="/2018/07/24/I'm%20back!/"><span>I'm back!</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2019 By Mike-wen</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script></body></html>
