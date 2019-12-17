@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="前言 设想这样一种情况，如果小A写了一篇文章，并在过程中为了保险保存了大量相似的文章，用来备用，以防后悔拿来用，很麻烦。 有一天小A想让小B帮忙协作写文章，一天后，小B完成了改动，小A也完成了自己的改动，小A希望自己能将小A和小B的协作合并，需要找出不同，很困难。 git是一款版本控制软件，可以用来帮忙解决文档的历史回档问题共同协作的合并问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git基础操作">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;29&#x2F;git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C&#x2F;index.html">
+<meta property="og:site_name" content="SYLZW daily">
+<meta property="og:description" content="前言 设想这样一种情况，如果小A写了一篇文章，并在过程中为了保险保存了大量相似的文章，用来备用，以防后悔拿来用，很麻烦。 有一天小A想让小B帮忙协作写文章，一天后，小B完成了改动，小A也完成了自己的改动，小A希望自己能将小A和小B的协作合并，需要找出不同，很困难。 git是一款版本控制软件，可以用来帮忙解决文档的历史回档问题共同协作的合并问题。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;29&#x2F;git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C&#x2F;history.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;29&#x2F;git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C&#x2F;git_config.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;29&#x2F;git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C&#x2F;git_init.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;29&#x2F;git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C&#x2F;git_add.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;29&#x2F;git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C&#x2F;git_add1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;29&#x2F;git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C&#x2F;git_log.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;29&#x2F;git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C&#x2F;git_log_pretty.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;29&#x2F;git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C&#x2F;git_reset.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;29&#x2F;git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C&#x2F;git_log1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;29&#x2F;git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C&#x2F;git_reflog.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;29&#x2F;git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C&#x2F;git_hard.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;29&#x2F;git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C&#x2F;git_repository.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;29&#x2F;git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C&#x2F;%E5%9C%BA%E6%99%AF1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;29&#x2F;git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C&#x2F;%E5%9C%BA%E6%99%AF2.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;29&#x2F;git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C&#x2F;%E5%9C%BA%E6%99%AF3_1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;29&#x2F;git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C&#x2F;%E5%9C%BA%E6%99%AF3_2.png">
+<meta property="article:published_time" content="2018-08-28T16:07:17.000Z">
+<meta property="article:modified_time" content="2018-09-24T02:32:55.000Z">
+<meta property="article:author" content="Mike-wen">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;29&#x2F;git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C&#x2F;history.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/29/git基础操作/"/>
+
+
+
+
+
+  <title>git基础操作 | SYLZW daily</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.1.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SYLZW daily</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/29/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mike-wen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SYLZW daily">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">git基础操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-29T00:07:17+08:00">
+                2018-08-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul>
+<li>设想这样一种情况，如果小A写了一篇文章，并在过程中为了保险<code>保存了大量相似的文章</code>，用来备用，以防后悔拿来用，很麻烦。</li>
+<li>有一天小A想让小B帮忙协作写文章，一天后，小B完成了改动，小A也完成了自己的改动，小A希望自己能将小A和小B的<code>协作合并</code>，需要找出不同，很困难。</li>
+<li>git是一款版本控制软件，可以用来帮忙解决文档的<code>历史回档</code>问题<code>共同协作</code>的合并问题。<br><img src="history.png" alt=""><a id="more"></a>
+</li>
+</ul>
+<hr>
+<h1 id="git出现原因"><a href="#git出现原因" class="headerlink" title="git出现原因"></a>git出现原因</h1><blockquote>
+<ul>
+<li>2002年以前，世界各地的志愿者把源代码通过这个diff发给linus,<a href="https://baike.baidu.com/item/%E6%9E%97%E7%BA%B3%E6%96%AF%C2%B7%E6%89%98%E7%93%A6%E5%85%B9/2122821?fr=aladdin&fromid=400810&fromtitle=linus(linus)" target="_blank" rel="noopener">linus</a>本人通过手工方式合并代码。linus反对使用集中式版本控制系统，集中式版本控制系统速度慢而且是付费的，与linux的开源精神不符。</li>
+<li>linux就这样手工方式合并了十年，linus很难继续通过手工方式合并，社区的兄弟们表达了强烈的不满，linus选择了一个商业的版本控制系统bitkeeper，后来有位linux社区的兄弟视图破解bitkeeper,于是惹怒了开发公司bitmover,收回了linux社区的免费使用权。</li>
+<li>linus花了两周时间用C写了一个分布式版本控制系统，这就是GIT！git很快就成为了最流行的分布式版本控制系统。</li>
+</ul>
+</blockquote>
+<hr>
+<h1 id="现存的版本控制系统"><a href="#现存的版本控制系统" class="headerlink" title="现存的版本控制系统"></a>现存的版本控制系统</h1><h2 id="集中式版本控制系统：（CVS、SVN、ClearCase、VSS）"><a href="#集中式版本控制系统：（CVS、SVN、ClearCase、VSS）" class="headerlink" title="集中式版本控制系统：（CVS、SVN、ClearCase、VSS）"></a>集中式版本控制系统：（CVS、SVN、ClearCase、VSS）</h2><ul>
+<li>版本库是集中存放在中央服务器，干活的时候用的都是自己的电脑，所以先从中央服务器取得时候最信息的版本，干完活了，再把自己的活推送给中央服务器。一旦<code>中央服务器出现问题</code>，则所有人<code>不能工作</code>。</li>
+</ul>
+<h2 id="分布式版本控制系统：-git"><a href="#分布式版本控制系统：-git" class="headerlink" title="分布式版本控制系统：(git)"></a>分布式版本控制系统：(git)</h2><ul>
+<li>每个人的<code>本地电脑</code>都是一个完整的版本库，这样，你的工作不需要工作不需要联网，你自己电脑改了文件A，你的同事也在他的电脑上改了文件A。这时，你们俩之间只需要各自的修改推送给对方，就可以互相看到对方的修改。但很少存在两人之间的电脑上推送版本库的。分布式版本控制系统通常也有一台充当“<code>中央服务器端</code>”，服务器服务的作用仅仅是用来下那个<code>方便交换</code>。</li>
+</ul>
+<hr>
+<h1 id="git安装"><a href="#git安装" class="headerlink" title="git安装"></a>git安装</h1><p>linux: Debian或Ubuntu Linux</p>
+<blockquote>
+<p> sudo apt-get install git</p>
+</blockquote>
+<p>windows：</p>
+<blockquote>
+<p><a href="https://git-scm.com/downloads" target="_blank" rel="noopener">https://git-scm.com/downloads</a></p>
+</blockquote>
+<hr>
+<h1 id="git自报家门"><a href="#git自报家门" class="headerlink" title="git自报家门"></a>git自报家门</h1><ul>
+<li><p>每个机器都必须<code>自报家门</code>，你的名字和email地址.本地的所有git仓库都会使用这个配置，当然也可以对某个仓库制定不同的用户名和Email地址。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;Mike-wen&quot;</span><br><span class="line">git config --global user.email &quot;1781693821@qq.com&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可查看当前git仓库的配置情况。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list</span><br></pre></td></tr></table></figure>
+<p><img src="git_config.png" alt=""></p>
+</li>
+</ul>
+<hr>
+<h1 id="初始化使用GIT库"><a href="#初始化使用GIT库" class="headerlink" title="初始化使用GIT库#"></a>初始化使用GIT库#</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir test_repository </span><br><span class="line">git init	初始化一个版本的库</span><br><span class="line">git add readme.txt 告诉git将文件放到仓库</span><br><span class="line">git commit -m &quot;hello &quot;本次提交的说明&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="初始化GIT库"><a href="#初始化GIT库" class="headerlink" title="初始化GIT库"></a>初始化GIT库</h2><blockquote>
+<p><img src="git_init.png" alt=""></p>
+</blockquote>
+<h2 id="使用GIT库"><a href="#使用GIT库" class="headerlink" title="使用GIT库"></a>使用GIT库</h2><ul>
+<li>首先在test_repository新建名例为readme.txt文件<blockquote>
+<p><img src="git_add.png" alt=""></p>
+</blockquote>
+</li>
+<li><code>git add readme.txt</code>成功将readme.txt添加到缓存区</li>
+<li><code>git commit -m &#39;first write&#39;</code>,<code>-m</code>后面的文本是本次提交的说明<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 file changed:表示一个文件改动</span><br><span class="line">2 insertions:插入了两行内容</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><img src="git_add1.png" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h1 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h1><ul>
+<li><code>git log</code>查看最近到最远的提交日志<blockquote>
+<p><img src="git_log.png" alt=""></p>
+</blockquote>
+</li>
+<li><code>git log --pretty=oneline</code>查看简易的提交日志<blockquote>
+<p><img src="git_log_pretty.png" alt=""></p>
+</blockquote>
+</li>
+<li><code>git reset --hard HEAD^</code>(回退到上一个版本，HEAD^^前两个版本以此类推，也可以写成“HEAD~次数”)<blockquote>
+<p><img src="git_reset.png" alt=""></p>
+</blockquote>
+</li>
+<li><code>git log</code>后发现最新的版本号记录消失了，可以通过输入git reset –hard ID号回退到之前最新的版本号。<blockquote>
+<p><img src="git_log1.png" alt=""></p>
+</blockquote>
+</li>
+<li><code>git reflog</code>用来记录下每一次的版本的切换<blockquote>
+<p><img src="git_reflog.png" alt=""></p>
+</blockquote>
+</li>
+<li><code>git reset --hard 版本号</code>前四位便可以切换到指定版本<blockquote>
+<p><img src="git_hard.png" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<ul>
+<li>工作区和版本库(.git)、暂存区(stage)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add filename 将文件添加到stage(index)暂存区内</span><br><span class="line">git commit -m 将暂存区内的文件提交到版本库中</span><br><span class="line">git status查看当前版本较之前的改动</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><img src="git_repository.png" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<p>7.撤销修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- filename	丢弃工作区的修改</span><br></pre></td></tr></table></figure>
+<ol>
+<li>当暂存区没有内容时，执行该操作，会同步版本库中的内容    回到最近git commit</li>
+<li>当初暂存区有内容呀时，执行该操作，会同步暂存区内的内容 回到最近git add<br>场景1：当改乱了工作区的某个文件的内容，想直接丢弃工作区的内容<code>git checkout -- filename</code><blockquote>
+<p><img src="%E5%9C%BA%E6%99%AF1.png" alt=""><br>场景2：当改乱了工作区的内容，并添加到了占存区</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD filename</span><br><span class="line">git checkout -- filename</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><img src="%E5%9C%BA%E6%99%AF2.png" alt=""></p>
+</blockquote>
+</li>
+</ol>
+<p>场景3：已经提交了不适合的版本修改，回退版本<br><code>git reset --hard HEAD^</code></p>
+<blockquote>
+<p><img src="%E5%9C%BA%E6%99%AF3_1.png" alt=""><br><img src="%E5%9C%BA%E6%99%AF3_2.png" alt=""></p>
+</blockquote>
+<hr>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener" title="git">廖雪峰的GIT教程</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/27/markdown%E8%AF%AD%E6%B3%95%E6%95%B4%E7%90%86/" rel="next" title="markdown语法整理">
+                <i class="fa fa-chevron-left"></i> markdown语法整理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/08/VisualCode%E6%90%AD%E5%BB%BAc%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/" rel="prev" title="VisualCode搭建c/c++环境">
+                VisualCode搭建c/c++环境 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mike-wen" />
+          <p class="site-author-name" itemprop="name">Mike-wen</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git出现原因"><span class="nav-number">2.</span> <span class="nav-text">git出现原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#现存的版本控制系统"><span class="nav-number">3.</span> <span class="nav-text">现存的版本控制系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#集中式版本控制系统：（CVS、SVN、ClearCase、VSS）"><span class="nav-number">3.1.</span> <span class="nav-text">集中式版本控制系统：（CVS、SVN、ClearCase、VSS）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式版本控制系统：-git"><span class="nav-number">3.2.</span> <span class="nav-text">分布式版本控制系统：(git)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git安装"><span class="nav-number">4.</span> <span class="nav-text">git安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git自报家门"><span class="nav-number">5.</span> <span class="nav-text">git自报家门</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#初始化使用GIT库"><span class="nav-number">6.</span> <span class="nav-text">初始化使用GIT库#</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化GIT库"><span class="nav-number">6.1.</span> <span class="nav-text">初始化GIT库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用GIT库"><span class="nav-number">6.2.</span> <span class="nav-text">使用GIT库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#版本控制"><span class="nav-number">7.</span> <span class="nav-text">版本控制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考链接"><span class="nav-number">8.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mike-wen</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
